@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS } from "@/data/courses";
+import { ChatAssistant } from "@/components/ChatAssistant";
+
 
 
 export const Route = createFileRoute("/")({
@@ -231,12 +233,13 @@ function HomePage() {
         </div>
 
         {/* Filters */}
-        <div className="mt-8 space-y-3">
+        <div className="mt-8 space-y-4">
           <FilterRow label="Category" value={category} onChange={setCategory} options={CATEGORIES} activeColor="bg-ink text-cream" />
           <FilterRow label="Provider" value={provider} onChange={setProvider} options={PROVIDERS} activeColor="bg-ink text-cream" />
           <FilterRow label="Level" value={level} onChange={(v) => setLevel(v as typeof level)} options={[...LEVELS]} activeColor="bg-violet-glow text-white" />
           <FilterRow label="Cost" value={cost} onChange={(v) => setCost(v as typeof cost)} options={[...COSTS]} activeColor="bg-flame text-white" />
         </div>
+
 
         <p className="mt-6 text-sm text-ink/60">
           Showing <span className="font-semibold text-ink">{paged.length}</span> of{" "}
@@ -403,7 +406,10 @@ function HomePage() {
           © {new Date().getFullYear()} FreeCertHub · Course & certificate terms set by each provider.
         </div>
       </footer>
+
+      <ChatAssistant />
     </main>
+
   );
 }
 
@@ -421,23 +427,25 @@ function FilterRow({
   activeColor: string;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-2 w-20 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">
+    <div className="flex flex-col gap-3 rounded-2xl border border-ink/10 bg-white/60 p-4 sm:flex-row sm:items-start">
+      <span className="w-full shrink-0 text-xs font-bold uppercase tracking-[0.18em] text-ink/60 sm:w-24 sm:pt-2 sm:text-sm">
         {label}
       </span>
-      {options.map((o) => (
-        <button
-          key={o}
-          onClick={() => onChange(o)}
-          className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
-            value === o
-              ? `${activeColor} border-transparent`
-              : "border-ink/15 bg-white text-ink/70 hover:border-ink/40"
-          }`}
-        >
-          {o}
-        </button>
-      ))}
+      <div className="flex flex-wrap gap-2">
+        {options.map((o) => (
+          <button
+            key={o}
+            onClick={() => onChange(o)}
+            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+              value === o
+                ? `${activeColor} border-transparent shadow-sm`
+                : "border-ink/15 bg-white text-ink/75 hover:border-ink hover:text-ink"
+            }`}
+          >
+            {o}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
