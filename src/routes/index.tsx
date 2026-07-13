@@ -40,6 +40,8 @@ function HomePage() {
   const [category, setCategory] = useState("All");
   const [level, setLevel] = useState<(typeof LEVELS)[number]>("All");
   const [cost, setCost] = useState<(typeof COSTS)[number]>("All");
+  const [provider, setProvider] = useState("All");
+  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -47,6 +49,7 @@ function HomePage() {
       if (category !== "All" && c.category !== category) return false;
       if (level !== "All" && c.level !== level) return false;
       if (cost !== "All" && c.cost !== cost) return false;
+      if (provider !== "All" && c.provider !== provider) return false;
       if (!q) return true;
       return (
         c.title.toLowerCase().includes(q) ||
@@ -54,7 +57,15 @@ function HomePage() {
         c.blurb.toLowerCase().includes(q)
       );
     });
-  }, [query, category, level, cost]);
+  }, [query, category, level, cost, provider]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [query, category, level, cost, provider]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const paged = filtered.slice(0, page * PAGE_SIZE);
+
 
   return (
     <main className="min-h-screen bg-cream font-sans text-ink" style={{ fontFamily: "var(--font-sans)" }}>
