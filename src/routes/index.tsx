@@ -305,7 +305,19 @@ function HomePage() {
             </div>
           )}
         </div>
+
+        {page < totalPages && (
+          <div className="mt-10 flex justify-center">
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream shadow-[0_6px_0_0_oklch(0.72_0.19_45)] transition hover:-translate-y-0.5"
+            >
+              Load {Math.min(PAGE_SIZE, filtered.length - paged.length)} more courses
+            </button>
+          </div>
+        )}
       </section>
+
 
       {/* How it works */}
       <section id="how" className="relative z-10 border-t border-ink/10 bg-ink text-cream">
