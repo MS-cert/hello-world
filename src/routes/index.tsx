@@ -233,13 +233,20 @@ function HomePage() {
         {/* Filters */}
         <div className="mt-8 space-y-3">
           <FilterRow label="Category" value={category} onChange={setCategory} options={CATEGORIES} activeColor="bg-ink text-cream" />
+          <FilterRow label="Provider" value={provider} onChange={setProvider} options={PROVIDERS} activeColor="bg-ink text-cream" />
           <FilterRow label="Level" value={level} onChange={(v) => setLevel(v as typeof level)} options={[...LEVELS]} activeColor="bg-violet-glow text-white" />
           <FilterRow label="Cost" value={cost} onChange={(v) => setCost(v as typeof cost)} options={[...COSTS]} activeColor="bg-flame text-white" />
         </div>
 
+        <p className="mt-6 text-sm text-ink/60">
+          Showing <span className="font-semibold text-ink">{paged.length}</span> of{" "}
+          <span className="font-semibold text-ink">{filtered.length}</span> courses
+        </p>
+
         {/* Grid */}
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((c, i) => (
+        <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {paged.map((c, i) => (
+
             <a
               key={c.title}
               href={c.url}
