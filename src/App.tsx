@@ -269,8 +269,14 @@ export default function App() {
       </section>
 
       <footer className="relative z-10 border-t border-ink/10 bg-cream">
-        <div className="mx-auto max-w-7xl px-6 py-10 text-center text-xs text-ink/50">
-          © {new Date().getFullYear()} FreeCertHub · Course & certificate terms set by each provider.
+        <div className="mx-auto max-w-7xl px-6 py-10 text-center">
+          <p className="text-lg sm:text-xl" style={{ fontFamily: "var(--font-display)" }}>
+            Built & designed by{" "}
+            <span className="italic font-bold text-flame">Madhav Singla</span>
+          </p>
+          <p className="mt-3 text-xs text-ink/50">
+            © {new Date().getFullYear()} FreeCertHub · Course & certificate terms set by each provider.
+          </p>
         </div>
       </footer>
 
