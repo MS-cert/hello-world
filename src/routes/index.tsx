@@ -443,7 +443,3 @@ function FilterRow({
     </div>
   );
 }
-
-    </div>
-  );
-}
