@@ -196,7 +196,7 @@ function HomePage() {
           {[
             { k: COURSES.length + "+", v: "Free courses" },
             { k: CATEGORIES.length - 1 + "", v: "Skill categories" },
-            { k: "9", v: "Global providers" },
+            { k: PROVIDERS.length - 1 + "", v: "Global providers" },
           ].map((s) => (
             <div key={s.v}>
               <div className="text-5xl sm:text-6xl" style={{ fontFamily: "var(--font-display)" }}>
