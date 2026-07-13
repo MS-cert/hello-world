@@ -1,34 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS } from "@/data/courses";
 import { ChatAssistant } from "@/components/ChatAssistant";
-
-
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "FreeCertHub — Free Certificate Courses from Top Companies" },
-      {
-        name: "description",
-        content:
-          "Handpicked free courses with certificates from Google, HubSpot, IBM, Cisco, Microsoft, Meta, AWS and more.",
-      },
-      { property: "og:title", content: "FreeCertHub" },
-      { property: "og:description", content: "Companies giving free certificates on course completion." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: HomePage,
-  errorComponent: ({ error, reset }) => (
-    <div className="p-8">
-      <p>Error: {error.message}</p>
-      <button onClick={reset} className="underline">Retry</button>
-    </div>
-  ),
-  notFoundComponent: () => <div className="p-8">Not found</div>,
-});
 
 const COMPANY_LOGOS = [
   "Google", "HubSpot", "IBM", "Cisco", "Microsoft", "Meta", "AWS", "Coursera", "Yale", "Harvard", "freeCodeCamp", "Kaggle",
@@ -36,8 +8,7 @@ const COMPANY_LOGOS = [
 
 const PAGE_SIZE = 24;
 
-
-function HomePage() {
+export default function App() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [level, setLevel] = useState<(typeof LEVELS)[number]>("All");
@@ -61,17 +32,13 @@ function HomePage() {
     });
   }, [query, category, level, cost, provider]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [query, category, level, cost, provider]);
+  useEffect(() => { setPage(1); }, [query, category, level, cost, provider]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const paged = filtered.slice(0, page * PAGE_SIZE);
 
-
   return (
     <main className="min-h-screen bg-cream font-sans text-ink" style={{ fontFamily: "var(--font-sans)" }}>
-      {/* Grain / noise backdrop */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 z-0 opacity-[0.06] mix-blend-multiply"
@@ -81,7 +48,6 @@ function HomePage() {
         }}
       />
 
-      {/* Nav */}
       <header className="sticky top-0 z-30 border-b border-ink/10 bg-cream/80 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a href="#top" className="flex items-center gap-2">
@@ -97,16 +63,12 @@ function HomePage() {
             <a href="#how" className="hover:text-ink">How it works</a>
             <a href="#faq" className="hover:text-ink">FAQ</a>
           </nav>
-          <a
-            href="#courses"
-            className="hidden rounded-full bg-ink px-4 py-2 text-xs font-semibold text-cream shadow-[0_4px_0_0_oklch(0.72_0.19_45)] transition hover:-translate-y-0.5 md:inline-flex"
-          >
+          <a href="#courses" className="hidden rounded-full bg-ink px-4 py-2 text-xs font-semibold text-cream shadow-[0_4px_0_0_oklch(0.72_0.19_45)] transition hover:-translate-y-0.5 md:inline-flex">
             Browse courses →
           </a>
         </div>
       </header>
 
-      {/* Hero */}
       <section id="top" className="relative z-10 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 pt-16 pb-20 sm:pt-24">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
@@ -115,10 +77,7 @@ function HomePage() {
                 <span className="h-1.5 w-1.5 rounded-full bg-flame" />
                 {COURSES.length} handpicked courses · updated 2026
               </span>
-              <h1
-                className="mt-6 text-5xl leading-[0.95] tracking-tight sm:text-7xl lg:text-[92px]"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
+              <h1 className="mt-6 text-5xl leading-[0.95] tracking-tight sm:text-7xl lg:text-[92px]" style={{ fontFamily: "var(--font-display)" }}>
                 Learn something new.{" "}
                 <span className="italic text-flame">Get the certificate.</span>{" "}
                 <span className="relative inline-block">
@@ -128,25 +87,17 @@ function HomePage() {
                 nothing.
               </h1>
               <p className="mt-8 max-w-2xl text-lg text-ink/70 sm:text-xl">
-                A living catalogue of genuinely free courses from Google, HubSpot, Cisco, IBM,
-                Microsoft, Meta, AWS and more — each one hands you a real certificate the
-                moment you finish.
+                A living catalogue of genuinely free courses from Google, HubSpot, Cisco, IBM, Microsoft, Meta, AWS and more — each one hands you a real certificate the moment you finish.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-3">
-                <a
-                  href="#courses"
-                  className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream shadow-[0_6px_0_0_oklch(0.72_0.19_45)] transition hover:-translate-y-0.5 hover:shadow-[0_10px_0_0_oklch(0.72_0.19_45)]"
-                >
+                <a href="#courses" className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream shadow-[0_6px_0_0_oklch(0.72_0.19_45)] transition hover:-translate-y-0.5 hover:shadow-[0_10px_0_0_oklch(0.72_0.19_45)]">
                   Explore {COURSES.length} courses
                   <span className="transition group-hover:translate-x-1">→</span>
                 </a>
-                <a href="#how" className="text-sm font-medium text-ink/70 underline underline-offset-4 hover:text-ink">
-                  How it works
-                </a>
+                <a href="#how" className="text-sm font-medium text-ink/70 underline underline-offset-4 hover:text-ink">How it works</a>
               </div>
             </div>
 
-            {/* Hero visual card */}
             <div className="relative lg:col-span-4">
               <div className="absolute -inset-4 -rotate-2 rounded-3xl bg-lime/60" aria-hidden />
               <div className="relative rotate-1 rounded-3xl border border-ink bg-white p-6 shadow-[8px_8px_0_0_oklch(0.16_0.02_250)]">
@@ -172,27 +123,17 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Logo strip */}
           <div className="mt-16 border-y border-ink/10 py-6">
-            <p className="mb-4 text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-ink/50">
-              Certificates from
-            </p>
+            <p className="mb-4 text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-ink/50">Certificates from</p>
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
               {COMPANY_LOGOS.map((n) => (
-                <span
-                  key={n}
-                  className="text-xl font-semibold tracking-tight text-ink/60"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {n}
-                </span>
+                <span key={n} className="text-xl font-semibold tracking-tight text-ink/60" style={{ fontFamily: "var(--font-display)" }}>{n}</span>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats */}
       <section className="relative z-10 mx-auto max-w-7xl px-6 pb-16">
         <div className="grid gap-4 rounded-3xl border border-ink bg-ink p-8 text-cream sm:grid-cols-3">
           {[
@@ -201,16 +142,13 @@ function HomePage() {
             { k: PROVIDERS.length - 1 + "", v: "Global providers" },
           ].map((s) => (
             <div key={s.v}>
-              <div className="text-5xl sm:text-6xl" style={{ fontFamily: "var(--font-display)" }}>
-                {s.k}
-              </div>
+              <div className="text-5xl sm:text-6xl" style={{ fontFamily: "var(--font-display)" }}>{s.k}</div>
               <div className="mt-1 text-sm text-cream/60">{s.v}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Courses */}
       <section id="courses" className="relative z-10 mx-auto max-w-7xl px-6 pb-24">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -223,16 +161,10 @@ function HomePage() {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-ink/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" />
             </svg>
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search Python, SEO, cloud…"
-              className="w-56 bg-transparent text-sm outline-none placeholder:text-ink/40"
-            />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search Python, SEO, cloud…" className="w-56 bg-transparent text-sm outline-none placeholder:text-ink/40" />
           </div>
         </div>
 
-        {/* Filters */}
         <div className="mt-8 space-y-4">
           <FilterRow label="Category" value={category} onChange={setCategory} options={CATEGORIES} activeColor="bg-ink text-cream" />
           <FilterRow label="Provider" value={provider} onChange={setProvider} options={PROVIDERS} activeColor="bg-ink text-cream" />
@@ -240,64 +172,27 @@ function HomePage() {
           <FilterRow label="Cost" value={cost} onChange={(v) => setCost(v as typeof cost)} options={[...COSTS]} activeColor="bg-flame text-white" />
         </div>
 
-
         <p className="mt-6 text-sm text-ink/60">
           Showing <span className="font-semibold text-ink">{paged.length}</span> of{" "}
           <span className="font-semibold text-ink">{filtered.length}</span> courses
         </p>
 
-        {/* Grid */}
         <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {paged.map((c, i) => (
-
-            <a
-              key={c.title}
-              href={c.url}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="group relative flex flex-col overflow-hidden rounded-3xl border border-ink bg-white p-6 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_oklch(0.16_0.02_250)]"
-            >
-              {/* Accent tab */}
-              <div
-                className={`absolute right-6 top-0 h-6 w-16 rounded-b-lg ${
-                  i % 4 === 0 ? "bg-flame" : i % 4 === 1 ? "bg-lime" : i % 4 === 2 ? "bg-violet-glow" : "bg-ink"
-                }`}
-                aria-hidden
-              />
+            <a key={c.title} href={c.url} target="_blank" rel="noreferrer noopener" className="group relative flex flex-col overflow-hidden rounded-3xl border border-ink bg-white p-6 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_oklch(0.16_0.02_250)]">
+              <div className={`absolute right-6 top-0 h-6 w-16 rounded-b-lg ${i % 4 === 0 ? "bg-flame" : i % 4 === 1 ? "bg-lime" : i % 4 === 2 ? "bg-violet-glow" : "bg-ink"}`} aria-hidden />
               <div className="flex items-center gap-2">
-                <span className="rounded-full bg-ink/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink/70">
-                  {c.category}
-                </span>
-                <span
-                  className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${
-                    c.cost === "Fully Free"
-                      ? "bg-lime/40 text-ink"
-                      : c.cost === "Free Course, Paid Cert"
-                      ? "bg-flame/20 text-flame"
-                      : "bg-violet-glow/20 text-violet-glow"
-                  }`}
-                >
-                  {c.cost}
-                </span>
+                <span className="rounded-full bg-ink/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink/70">{c.category}</span>
+                <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${c.cost === "Fully Free" ? "bg-lime/40 text-ink" : c.cost === "Free Course, Paid Cert" ? "bg-flame/20 text-flame" : "bg-violet-glow/20 text-violet-glow"}`}>{c.cost}</span>
               </div>
-              <h3
-                className="mt-5 text-2xl leading-tight tracking-tight"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {c.title}
-              </h3>
+              <h3 className="mt-5 text-2xl leading-tight tracking-tight" style={{ fontFamily: "var(--font-display)" }}>{c.title}</h3>
               <p className="mt-1 text-sm font-medium text-ink/60">by {c.provider}</p>
               <p className="mt-4 flex-1 text-sm leading-relaxed text-ink/70">{c.blurb}</p>
               <div className="mt-6 flex items-center justify-between border-t border-ink/10 pt-4 text-xs text-ink/60">
-                <span className="flex items-center gap-3">
-                  <span>⏱ {c.duration}</span>
-                  <span>· {c.level}</span>
-                </span>
+                <span className="flex items-center gap-3"><span>⏱ {c.duration}</span><span>· {c.level}</span></span>
                 <span className="inline-flex items-center gap-1 font-semibold text-ink transition group-hover:text-flame">
                   Enroll
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M7 17 17 7" /><path d="M8 7h9v9" />
-                  </svg>
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17 17 7" /><path d="M8 7h9v9" /></svg>
                 </span>
               </div>
             </a>
@@ -311,18 +206,13 @@ function HomePage() {
 
         {page < totalPages && (
           <div className="mt-10 flex justify-center">
-            <button
-              onClick={() => setPage((p) => p + 1)}
-              className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream shadow-[0_6px_0_0_oklch(0.72_0.19_45)] transition hover:-translate-y-0.5"
-            >
+            <button onClick={() => setPage((p) => p + 1)} className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream shadow-[0_6px_0_0_oklch(0.72_0.19_45)] transition hover:-translate-y-0.5">
               Load {Math.min(PAGE_SIZE, filtered.length - paged.length)} more courses
             </button>
           </div>
         )}
       </section>
 
-
-      {/* How it works */}
       <section id="how" className="relative z-10 border-t border-ink/10 bg-ink text-cream">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-lime">The ritual</p>
@@ -336,9 +226,7 @@ function HomePage() {
               { n: "03", t: "Claim your cert", d: "Download a PDF or claim a Credly/LinkedIn shareable digital badge." },
             ].map((s) => (
               <div key={s.n} className="border-t border-cream/20 pt-6">
-                <div className="text-flame" style={{ fontFamily: "var(--font-display)" }}>
-                  <span className="text-5xl">{s.n}</span>
-                </div>
+                <div className="text-flame" style={{ fontFamily: "var(--font-display)" }}><span className="text-5xl">{s.n}</span></div>
                 <h3 className="mt-4 text-2xl" style={{ fontFamily: "var(--font-display)" }}>{s.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-cream/70">{s.d}</p>
               </div>
@@ -347,37 +235,20 @@ function HomePage() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section id="faq" className="relative z-10 mx-auto max-w-3xl px-6 py-24">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-flame">Small print</p>
-        <h2 className="mt-2 text-4xl sm:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
-          Frequently asked
-        </h2>
+        <h2 className="mt-2 text-4xl sm:text-5xl" style={{ fontFamily: "var(--font-display)" }}>Frequently asked</h2>
         <div className="mt-8 divide-y divide-ink/10 border-y border-ink/10">
           {[
-            {
-              q: "Are these certificates recognized by employers?",
-              a: "Google, HubSpot, Cisco, IBM, Microsoft, Meta and AWS certificates are widely recognized. Add them to LinkedIn, your CV, or your portfolio.",
-            },
-            {
-              q: "Is everything really free?",
-              a: "Courses tagged 'Fully Free' cost nothing. 'Free Course, Paid Cert' means the learning is free but the official proctored exam is paid. 'Free with Aid' means you must apply for financial aid to unlock the verified cert.",
-            },
-            {
-              q: "Can I share these on LinkedIn?",
-              a: "Yes. Most providers issue a shareable Credly badge or a public verification link — one click to add to LinkedIn.",
-            },
-            {
-              q: "How often is the list updated?",
-              a: "We review the catalogue quarterly and remove any provider that quietly moves behind a paywall.",
-            },
+            { q: "Are these certificates recognized by employers?", a: "Google, HubSpot, Cisco, IBM, Microsoft, Meta and AWS certificates are widely recognized. Add them to LinkedIn, your CV, or your portfolio." },
+            { q: "Is everything really free?", a: "Courses tagged 'Fully Free' cost nothing. 'Free Course, Paid Cert' means the learning is free but the official proctored exam is paid. 'Free with Aid' means you must apply for financial aid to unlock the verified cert." },
+            { q: "Can I share these on LinkedIn?", a: "Yes. Most providers issue a shareable Credly badge or a public verification link — one click to add to LinkedIn." },
+            { q: "How often is the list updated?", a: "We review the catalogue quarterly and remove any provider that quietly moves behind a paywall." },
           ].map((f) => (
             <details key={f.q} className="group py-5">
               <summary className="flex cursor-pointer list-none items-center justify-between text-lg font-medium">
                 {f.q}
-                <span className="ml-4 grid h-8 w-8 place-items-center rounded-full border border-ink/20 text-ink/60 transition group-open:rotate-45 group-open:border-flame group-open:text-flame">
-                  +
-                </span>
+                <span className="ml-4 grid h-8 w-8 place-items-center rounded-full border border-ink/20 text-ink/60 transition group-open:rotate-45 group-open:border-flame group-open:text-flame">+</span>
               </summary>
               <p className="mt-3 text-sm leading-relaxed text-ink/70">{f.a}</p>
             </details>
@@ -385,17 +256,13 @@ function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24">
         <div className="relative overflow-hidden rounded-[2rem] border border-ink bg-lime p-12 text-ink sm:p-16">
           <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-flame/30 blur-3xl" aria-hidden />
           <h2 className="max-w-3xl text-4xl sm:text-6xl" style={{ fontFamily: "var(--font-display)" }}>
             Start today. Finish this week. <span className="italic">Add a line to your CV.</span>
           </h2>
-          <a
-            href="#courses"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream transition hover:-translate-y-0.5"
-          >
+          <a href="#courses" className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream transition hover:-translate-y-0.5">
             Browse the catalogue →
           </a>
         </div>
@@ -409,39 +276,16 @@ function HomePage() {
 
       <ChatAssistant />
     </main>
-
   );
 }
 
-function FilterRow({
-  label,
-  value,
-  onChange,
-  options,
-  activeColor,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: string[];
-  activeColor: string;
-}) {
+function FilterRow({ label, value, onChange, options, activeColor }: { label: string; value: string; onChange: (v: string) => void; options: string[]; activeColor: string; }) {
   return (
     <div className="flex flex-col gap-3 rounded-2xl border border-ink/10 bg-white/60 p-4 sm:flex-row sm:items-start">
-      <span className="w-full shrink-0 text-xs font-bold uppercase tracking-[0.18em] text-ink/60 sm:w-24 sm:pt-2 sm:text-sm">
-        {label}
-      </span>
+      <span className="w-full shrink-0 text-xs font-bold uppercase tracking-[0.18em] text-ink/60 sm:w-24 sm:pt-2 sm:text-sm">{label}</span>
       <div className="flex flex-wrap gap-2">
         {options.map((o) => (
-          <button
-            key={o}
-            onClick={() => onChange(o)}
-            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
-              value === o
-                ? `${activeColor} border-transparent shadow-sm`
-                : "border-ink/15 bg-white text-ink/75 hover:border-ink hover:text-ink"
-            }`}
-          >
+          <button key={o} onClick={() => onChange(o)} className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${value === o ? `${activeColor} border-transparent shadow-sm` : "border-ink/15 bg-white text-ink/75 hover:border-ink hover:text-ink"}`}>
             {o}
           </button>
         ))}

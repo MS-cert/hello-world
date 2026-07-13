@@ -1,9 +1,8 @@
-import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
-import { createFileRoute } from "@tanstack/react-router";
+import { createLovableAiGatewayProvider } from "../src/lib/ai-gateway.server";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
-import { COURSES } from "@/data/courses";
+import { COURSES } from "../src/data/courses";
 
-type ChatRequestBody = { messages?: unknown };
+export const config = { runtime: "edge" };
 
 const CATALOGUE_SUMMARY = COURSES.map(
   (c) => `- ${c.title} — ${c.provider} · ${c.category} · ${c.level} · ${c.duration} · ${c.cost}`,
@@ -26,29 +25,27 @@ Guidelines:
 FreeCertHub catalogue (${COURSES.length} courses):
 ${CATALOGUE_SUMMARY}`;
 
-export const Route = createFileRoute("/api/chat")({
-  server: {
-    handlers: {
-      POST: async ({ request }) => {
-        const { messages } = (await request.json()) as ChatRequestBody;
-        if (!Array.isArray(messages)) {
-          return new Response("Messages are required", { status: 400 });
-        }
+export default async function handler(req: Request) {
+  if (req.method !== "POST") {
+    return new Response("Method not allowed", { status: 405 });
+  }
 
-        const key = process.env.LOVABLE_API_KEY;
-        if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+  const { messages } = (await req.json()) as { messages?: unknown };
+  if (!Array.isArray(messages)) {
+    return new Response("Messages are required", { status: 400 });
+  }
 
-        const gateway = createLovableAiGatewayProvider(key);
-        const result = streamText({
-          model: gateway("google/gemini-3-flash-preview"),
-          system: SYSTEM_PROMPT,
-          messages: await convertToModelMessages(messages as UIMessage[]),
-        });
+  const key = process.env.LOVABLE_API_KEY;
+  if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
 
-        return result.toUIMessageStreamResponse({
-          originalMessages: messages as UIMessage[],
-        });
-      },
-    },
-  },
-});
+  const gateway = createLovableAiGatewayProvider(key);
+  const result = streamText({
+    model: gateway("google/gemini-3-flash-preview"),
+    system: SYSTEM_PROMPT,
+    messages: await convertToModelMessages(messages as UIMessage[]),
+  });
+
+  return result.toUIMessageStreamResponse({
+    originalMessages: messages as UIMessage[],
+  });
+}
