@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS } from "@/data/courses";
+import { ChatAssistant } from "@/components/ChatAssistant";
+
 
 
 export const Route = createFileRoute("/")({
