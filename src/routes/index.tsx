@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS } from "@/data/courses";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,213 +28,20 @@ export const Route = createFileRoute("/")({
   notFoundComponent: () => <div className="p-8">Not found</div>,
 });
 
-type Course = {
-  title: string;
-  provider: string;
-  category: string;
-  duration: string;
-  level: "Beginner" | "Intermediate" | "Advanced";
-  cost: "Fully Free" | "Free Course, Paid Cert" | "Free with Aid";
-  url: string;
-  blurb: string;
-};
-
-const COURSES: Course[] = [
-  {
-    title: "Fundamentals of Digital Marketing",
-    provider: "Google Digital Garage",
-    category: "Marketing",
-    duration: "40 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://learndigital.withgoogle.com/digitalgarage/course/digital-marketing",
-    blurb: "IAB Europe accredited. 26 modules covering SEO, ads, analytics and content.",
-  },
-  {
-    title: "Google AI Essentials",
-    provider: "Google",
-    category: "AI",
-    duration: "10 hours",
-    level: "Beginner",
-    cost: "Free with Aid",
-    url: "https://grow.google/ai-essentials/",
-    blurb: "Learn to use generative AI at work — prompt writing, workflows, responsible use.",
-  },
-  {
-    title: "Inbound Marketing Certification",
-    provider: "HubSpot Academy",
-    category: "Marketing",
-    duration: "4 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://academy.hubspot.com/courses/inbound-marketing",
-    blurb: "The classic HubSpot cert. Employers actually recognize it on your CV.",
-  },
-  {
-    title: "SEO Certification Course",
-    provider: "HubSpot Academy",
-    category: "Marketing",
-    duration: "3 hours",
-    level: "Intermediate",
-    cost: "Fully Free",
-    url: "https://academy.hubspot.com/courses/seo-training",
-    blurb: "On-page, off-page, technical SEO and link-building strategy from scratch.",
-  },
-  {
-    title: "Content Marketing Certification",
-    provider: "HubSpot Academy",
-    category: "Marketing",
-    duration: "6 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://academy.hubspot.com/courses/content-marketing",
-    blurb: "Build a content engine — storytelling, promotion, repurposing, analytics.",
-  },
-  {
-    title: "Introduction to Cybersecurity",
-    provider: "Cisco Networking Academy",
-    category: "Cybersecurity",
-    duration: "15 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://www.netacad.com/courses/introduction-to-cybersecurity",
-    blurb: "Cisco-issued certificate. Perfect first stop before CompTIA Security+.",
-  },
-  {
-    title: "Networking Basics",
-    provider: "Cisco Networking Academy",
-    category: "Networking",
-    duration: "25 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://www.netacad.com/courses/networking-basics",
-    blurb: "The IPv4, subnetting, and topology foundation for any IT role.",
-  },
-  {
-    title: "Python Essentials 1",
-    provider: "Cisco / OpenEDG",
-    category: "Programming",
-    duration: "30 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://www.netacad.com/courses/python-essentials-1",
-    blurb: "PCEP-aligned. Real coding practice with an official completion badge.",
-  },
-  {
-    title: "AI Fundamentals",
-    provider: "IBM SkillsBuild",
-    category: "AI",
-    duration: "20 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://skillsbuild.org",
-    blurb: "IBM digital credential via Credly. Machine learning, NLP and computer vision.",
-  },
-  {
-    title: "Data Analytics Fundamentals",
-    provider: "IBM SkillsBuild",
-    category: "Data",
-    duration: "18 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://skillsbuild.org",
-    blurb: "Excel, SQL and visualization basics. Credly badge on completion.",
-  },
-  {
-    title: "Azure Fundamentals (AZ-900 path)",
-    provider: "Microsoft Learn",
-    category: "Cloud",
-    duration: "10 hours",
-    level: "Beginner",
-    cost: "Free Course, Paid Cert",
-    url: "https://learn.microsoft.com/en-us/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/",
-    blurb: "Free learn badges. Great prep for the paid AZ-900 exam.",
-  },
-  {
-    title: "GitHub Foundations",
-    provider: "Microsoft Learn",
-    category: "Dev Tools",
-    duration: "8 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://learn.microsoft.com/en-us/training/github/",
-    blurb: "Git, GitHub, Actions, Copilot basics — with achievement badges.",
-  },
-  {
-    title: "Meta Certified Digital Marketing Associate (prep)",
-    provider: "Meta Blueprint",
-    category: "Marketing",
-    duration: "12 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://www.facebook.com/business/learn",
-    blurb: "Free study paths for Facebook & Instagram ad management.",
-  },
-  {
-    title: "Generative AI Learning Path",
-    provider: "Google Cloud Skills Boost",
-    category: "AI",
-    duration: "16 hours",
-    level: "Intermediate",
-    cost: "Fully Free",
-    url: "https://www.cloudskillsboost.google/paths/118",
-    blurb: "Free skill badges: LLMs, transformers, responsible AI on Google Cloud.",
-  },
-  {
-    title: "AWS Cloud Practitioner Essentials",
-    provider: "AWS Skill Builder",
-    category: "Cloud",
-    duration: "7 hours",
-    level: "Beginner",
-    cost: "Free Course, Paid Cert",
-    url: "https://skillbuilder.aws",
-    blurb: "Free course completion cert. Preps you for the CLF-C02 paid exam.",
-  },
-  {
-    title: "Introduction to Data Science",
-    provider: "Great Learning Academy",
-    category: "Data",
-    duration: "5 hours",
-    level: "Beginner",
-    cost: "Fully Free",
-    url: "https://www.mygreatlearning.com/academy",
-    blurb: "Quick zero-to-one intro. Certificate auto-issued after the final quiz.",
-  },
-  {
-    title: "The Science of Well-Being",
-    provider: "Yale · Coursera",
-    category: "Personal Dev",
-    duration: "19 hours",
-    level: "Beginner",
-    cost: "Free with Aid",
-    url: "https://www.coursera.org/learn/the-science-of-well-being",
-    blurb: "Yale's most popular course. Financial aid unlocks the verified cert.",
-  },
-  {
-    title: "Google IT Support Professional Certificate",
-    provider: "Google · Coursera",
-    category: "IT",
-    duration: "6 months",
-    level: "Beginner",
-    cost: "Free with Aid",
-    url: "https://www.coursera.org/professional-certificates/google-it-support",
-    blurb: "Job-ready IT credential. Apply for Coursera financial aid to earn free.",
-  },
-];
-
-const CATEGORIES = ["All", ...Array.from(new Set(COURSES.map((c) => c.category)))];
-const LEVELS = ["All", "Beginner", "Intermediate", "Advanced"] as const;
-const COSTS = ["All", "Fully Free", "Free Course, Paid Cert", "Free with Aid"] as const;
-
 const COMPANY_LOGOS = [
-  "Google", "HubSpot", "IBM", "Cisco", "Microsoft", "Meta", "AWS", "Coursera", "Yale",
+  "Google", "HubSpot", "IBM", "Cisco", "Microsoft", "Meta", "AWS", "Coursera", "Yale", "Harvard", "freeCodeCamp", "Kaggle",
 ];
+
+const PAGE_SIZE = 24;
+
 
 function HomePage() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [level, setLevel] = useState<(typeof LEVELS)[number]>("All");
   const [cost, setCost] = useState<(typeof COSTS)[number]>("All");
+  const [provider, setProvider] = useState("All");
+  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -240,6 +49,7 @@ function HomePage() {
       if (category !== "All" && c.category !== category) return false;
       if (level !== "All" && c.level !== level) return false;
       if (cost !== "All" && c.cost !== cost) return false;
+      if (provider !== "All" && c.provider !== provider) return false;
       if (!q) return true;
       return (
         c.title.toLowerCase().includes(q) ||
@@ -247,7 +57,15 @@ function HomePage() {
         c.blurb.toLowerCase().includes(q)
       );
     });
-  }, [query, category, level, cost]);
+  }, [query, category, level, cost, provider]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [query, category, level, cost, provider]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const paged = filtered.slice(0, page * PAGE_SIZE);
+
 
   return (
     <main className="min-h-screen bg-cream font-sans text-ink" style={{ fontFamily: "var(--font-sans)" }}>
@@ -378,7 +196,7 @@ function HomePage() {
           {[
             { k: COURSES.length + "+", v: "Free courses" },
             { k: CATEGORIES.length - 1 + "", v: "Skill categories" },
-            { k: "9", v: "Global providers" },
+            { k: PROVIDERS.length - 1 + "", v: "Global providers" },
           ].map((s) => (
             <div key={s.v}>
               <div className="text-5xl sm:text-6xl" style={{ fontFamily: "var(--font-display)" }}>
@@ -415,13 +233,20 @@ function HomePage() {
         {/* Filters */}
         <div className="mt-8 space-y-3">
           <FilterRow label="Category" value={category} onChange={setCategory} options={CATEGORIES} activeColor="bg-ink text-cream" />
+          <FilterRow label="Provider" value={provider} onChange={setProvider} options={PROVIDERS} activeColor="bg-ink text-cream" />
           <FilterRow label="Level" value={level} onChange={(v) => setLevel(v as typeof level)} options={[...LEVELS]} activeColor="bg-violet-glow text-white" />
           <FilterRow label="Cost" value={cost} onChange={(v) => setCost(v as typeof cost)} options={[...COSTS]} activeColor="bg-flame text-white" />
         </div>
 
+        <p className="mt-6 text-sm text-ink/60">
+          Showing <span className="font-semibold text-ink">{paged.length}</span> of{" "}
+          <span className="font-semibold text-ink">{filtered.length}</span> courses
+        </p>
+
         {/* Grid */}
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((c, i) => (
+        <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {paged.map((c, i) => (
+
             <a
               key={c.title}
               href={c.url}
@@ -480,7 +305,19 @@ function HomePage() {
             </div>
           )}
         </div>
+
+        {page < totalPages && (
+          <div className="mt-10 flex justify-center">
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream shadow-[0_6px_0_0_oklch(0.72_0.19_45)] transition hover:-translate-y-0.5"
+            >
+              Load {Math.min(PAGE_SIZE, filtered.length - paged.length)} more courses
+            </button>
+          </div>
+        )}
       </section>
+
 
       {/* How it works */}
       <section id="how" className="relative z-10 border-t border-ink/10 bg-ink text-cream">
