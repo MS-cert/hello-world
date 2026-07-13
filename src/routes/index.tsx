@@ -406,7 +406,10 @@ function HomePage() {
           © {new Date().getFullYear()} FreeCertHub · Course & certificate terms set by each provider.
         </div>
       </footer>
+
+      <ChatAssistant />
     </main>
+
   );
 }
 
