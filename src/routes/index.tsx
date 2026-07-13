@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS } from "@/data/courses";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
