@@ -421,23 +421,29 @@ function FilterRow({
   activeColor: string;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-2 w-20 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">
+    <div className="flex flex-col gap-3 rounded-2xl border border-ink/10 bg-white/60 p-4 sm:flex-row sm:items-start">
+      <span className="w-full shrink-0 text-xs font-bold uppercase tracking-[0.18em] text-ink/60 sm:w-24 sm:pt-2 sm:text-sm">
         {label}
       </span>
-      {options.map((o) => (
-        <button
-          key={o}
-          onClick={() => onChange(o)}
-          className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
-            value === o
-              ? `${activeColor} border-transparent`
-              : "border-ink/15 bg-white text-ink/70 hover:border-ink/40"
-          }`}
-        >
-          {o}
-        </button>
-      ))}
+      <div className="flex flex-wrap gap-2">
+        {options.map((o) => (
+          <button
+            key={o}
+            onClick={() => onChange(o)}
+            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+              value === o
+                ? `${activeColor} border-transparent shadow-sm`
+                : "border-ink/15 bg-white text-ink/75 hover:border-ink hover:text-ink"
+            }`}
+          >
+            {o}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
     </div>
   );
 }
