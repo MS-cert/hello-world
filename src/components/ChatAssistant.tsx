@@ -8,21 +8,24 @@ export function ChatAssistant() {
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const initialMessages: UIMessage[] = [
+    {
+      id: "welcome",
+      role: "assistant",
+      parts: [
+        {
+          type: "text",
+          text: "Hi! I'm your **FreeCertHub guide**. Ask me for course recommendations (e.g. *\"free Python cert for beginners\"*), how to earn a certificate, or anything else about learning online.",
+        },
+      ],
+    },
+  ];
+
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({ api: "/api/chat" }),
-    messages: [
-      {
-        id: "welcome",
-        role: "assistant",
-        parts: [
-          {
-            type: "text",
-            text: "Hi! I'm your **FreeCertHub guide**. Ask me for course recommendations (e.g. *\"free Python cert for beginners\"*), how to earn a certificate, or anything else about learning online.",
-          },
-        ],
-      } satisfies UIMessage,
-    ],
+    messages: initialMessages,
   });
+
 
   const busy = status === "submitted" || status === "streaming";
 
