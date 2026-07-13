@@ -231,12 +231,13 @@ function HomePage() {
         </div>
 
         {/* Filters */}
-        <div className="mt-8 space-y-3">
+        <div className="mt-8 space-y-4">
           <FilterRow label="Category" value={category} onChange={setCategory} options={CATEGORIES} activeColor="bg-ink text-cream" />
           <FilterRow label="Provider" value={provider} onChange={setProvider} options={PROVIDERS} activeColor="bg-ink text-cream" />
           <FilterRow label="Level" value={level} onChange={(v) => setLevel(v as typeof level)} options={[...LEVELS]} activeColor="bg-violet-glow text-white" />
           <FilterRow label="Cost" value={cost} onChange={(v) => setCost(v as typeof cost)} options={[...COSTS]} activeColor="bg-flame text-white" />
         </div>
+
 
         <p className="mt-6 text-sm text-ink/60">
           Showing <span className="font-semibold text-ink">{paged.length}</span> of{" "}
