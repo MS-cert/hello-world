@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS } from "@/data/courses";
+import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS, categoryOf, providerOf } from "@/data/courses";
 import { ChatAssistant } from "@/components/ChatAssistant";
 
 const COMPANY_LOGOS = [
@@ -19,10 +19,10 @@ export default function App() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return COURSES.filter((c) => {
-      if (category !== "All" && c.category !== category) return false;
+      if (category !== "All" && categoryOf(c) !== category) return false;
       if (level !== "All" && c.level !== level) return false;
       if (cost !== "All" && c.cost !== cost) return false;
-      if (provider !== "All" && c.provider !== provider) return false;
+      if (provider !== "All" && providerOf(c) !== provider) return false;
       if (!q) return true;
       return (
         c.title.toLowerCase().includes(q) ||
@@ -182,7 +182,7 @@ export default function App() {
             <a key={c.title} href={c.url} target="_blank" rel="noreferrer noopener" className="group relative flex flex-col overflow-hidden rounded-3xl border border-ink bg-white p-6 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_oklch(0.16_0.02_250)]">
               <div className={`absolute right-6 top-0 h-6 w-16 rounded-b-lg ${i % 4 === 0 ? "bg-flame" : i % 4 === 1 ? "bg-lime" : i % 4 === 2 ? "bg-violet-glow" : "bg-ink"}`} aria-hidden />
               <div className="flex items-center gap-2">
-                <span className="rounded-full bg-ink/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink/70">{c.category}</span>
+                <span className="rounded-full bg-ink/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink/70">{categoryOf(c)}</span>
                 <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${c.cost === "Fully Free" ? "bg-lime/40 text-ink" : c.cost === "Free Course, Paid Cert" ? "bg-flame/20 text-flame" : "bg-violet-glow/20 text-violet-glow"}`}>{c.cost}</span>
               </div>
               <h3 className="mt-5 text-2xl leading-tight tracking-tight" style={{ fontFamily: "var(--font-display)" }}>{c.title}</h3>
