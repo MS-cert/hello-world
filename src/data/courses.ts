@@ -357,7 +357,130 @@ export const COURSES: Course[] = [
   c("Salesforce AI Associate (prep)", "Salesforce Trailhead", "AI", "10h", "Beginner", PAID_CERT, "https://trailhead.salesforce.com/content/learn/trails/prepare-for-the-salesforce-ai-associate-credential", "Free study path — exam paid."),
 ];
 
-export const CATEGORIES = ["All", ...Array.from(new Set(COURSES.map((x) => x.category))).sort()];
+// ===== Canonical filter groups =====
+// Curated, ordered lists so the filter chips stay short and consistent.
+
+const CATEGORY_MAP: Record<string, string> = {
+  AI: "AI & Machine Learning",
+  Data: "Data & Analytics",
+  Analytics: "Data & Analytics",
+  Math: "Data & Analytics",
+  Programming: "Programming",
+  "Web Dev": "Web Development",
+  Cloud: "Cloud",
+  DevOps: "DevOps",
+  "Dev Tools": "DevOps",
+  Cybersecurity: "Cybersecurity",
+  Networking: "Networking",
+  Linux: "IT & Linux",
+  IT: "IT & Linux",
+  "Digital Literacy": "IT & Linux",
+  Marketing: "Marketing",
+  SEO: "Marketing",
+  Ads: "Marketing",
+  "Social Media": "Marketing",
+  Messaging: "Marketing",
+  CMS: "Marketing",
+  Sales: "Sales & CRM",
+  CRM: "Sales & CRM",
+  Business: "Business & Finance",
+  Finance: "Business & Finance",
+  Economics: "Business & Finance",
+  HR: "Business & Finance",
+  Operations: "Business & Finance",
+  Agency: "Business & Finance",
+  Design: "Design",
+  "Web Design": "Design",
+  Creative: "Design",
+  Product: "Product & PM",
+  "Project Mgmt": "Product & PM",
+  QA: "Product & PM",
+  Psychology: "Personal Development",
+  "Personal Dev": "Personal Development",
+  Learning: "Personal Development",
+  Philosophy: "Personal Development",
+  Health: "Personal Development",
+  Career: "Personal Development",
+  Language: "Language",
+  Music: "Creative Arts",
+  Blockchain: "Emerging Tech",
+  IoT: "Emerging Tech",
+  "Low-Code": "Emerging Tech",
+  Tech: "Emerging Tech",
+};
+
+const PROVIDER_MAP: Array<[RegExp, string]> = [
+  [/^HubSpot/i, "HubSpot Academy"],
+  [/Google/i, "Google"],
+  [/^IBM/i, "IBM"],
+  [/^Microsoft/i, "Microsoft"],
+  [/Meta/i, "Meta"],
+  [/AWS/i, "AWS"],
+  [/^Cisco|OpenEDG|NDG/i, "Cisco"],
+  [/Harvard/i, "Harvard University"],
+  [/^MIT/i, "MIT"],
+  [/Stanford|DeepLearning\.AI/i, "Stanford / DeepLearning.AI"],
+  [/Yale/i, "Yale University"],
+  [/Michigan/i, "University of Michigan"],
+  [/Helsinki|MinnaLearn/i, "University of Helsinki"],
+  [/McMaster/i, "McMaster / UC San Diego"],
+  [/Edinburgh/i, "University of Edinburgh"],
+  [/UQx|ETSx|edX|Linux Foundation/i, "edX"],
+  [/^Kaggle/i, "Kaggle"],
+  [/freeCodeCamp/i, "freeCodeCamp"],
+  [/LinkedIn/i, "LinkedIn Learning"],
+  [/Udacity/i, "Udacity"],
+  [/Alison/i, "Alison"],
+  [/Saylor/i, "Saylor Academy"],
+  [/Simplilearn/i, "Simplilearn"],
+  [/Great Learning/i, "Great Learning"],
+  [/Odin/i, "The Odin Project"],
+  [/Salesforce/i, "Salesforce Trailhead"],
+  [/Atlassian/i, "Atlassian"],
+  [/GitLab/i, "GitLab"],
+  [/Databricks/i, "Databricks"],
+  [/MongoDB/i, "MongoDB University"],
+  [/Oracle/i, "Oracle University"],
+];
+
+export const categoryOf = (course: Course): string =>
+  CATEGORY_MAP[course.category] ?? "Other";
+
+export const providerOf = (course: Course): string => {
+  for (const [re, name] of PROVIDER_MAP) if (re.test(course.provider)) return name;
+  return course.provider;
+};
+
+// Ordered category list (chip order in the UI)
+export const CATEGORIES = [
+  "All",
+  "AI & Machine Learning",
+  "Data & Analytics",
+  "Programming",
+  "Web Development",
+  "Cloud",
+  "DevOps",
+  "Cybersecurity",
+  "Networking",
+  "IT & Linux",
+  "Marketing",
+  "Sales & CRM",
+  "Business & Finance",
+  "Design",
+  "Product & PM",
+  "Personal Development",
+  "Language",
+  "Creative Arts",
+  "Emerging Tech",
+  "Other",
+];
+
 export const LEVELS = ["All", "Beginner", "Intermediate", "Advanced"] as const;
 export const COSTS = ["All", "Fully Free", "Free Course, Paid Cert", "Free with Aid"] as const;
-export const PROVIDERS = ["All", ...Array.from(new Set(COURSES.map((x) => x.provider))).sort()];
+
+// Providers grouped by brand, ordered by prominence
+export const PROVIDERS = [
+  "All",
+  ...Array.from(new Set(COURSES.map(providerOf))).sort((a, b) => a.localeCompare(b)),
+];
+
