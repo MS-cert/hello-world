@@ -281,6 +281,80 @@ export const COURSES: Course[] = [
   c("SQL for Data Analysis", "Udacity", "Data", "4wk", "Beginner", FREE, "https://www.udacity.com/course/sql-for-data-analysis--ud198", "Free SQL course using Mode Analytics."),
   c("Intro to Deep Learning with PyTorch", "Udacity", "AI", "2mo", "Intermediate", FREE, "https://www.udacity.com/course/deep-learning-pytorch--ud188", "Free PyTorch intro from Facebook AI."),
   c("Intro to Statistics", "Udacity", "Math", "8wk", "Beginner", FREE, "https://www.udacity.com/course/intro-to-statistics--st101", "Stats fundamentals for data work."),
+
+  // ===== freeCodeCamp =====
+  c("Responsive Web Design", "freeCodeCamp", "Web Dev", "300h", "Beginner", FREE, "https://www.freecodecamp.org/learn/2022/responsive-web-design/", "HTML, CSS, Flexbox, Grid — full free certification."),
+  c("JavaScript Algorithms and Data Structures", "freeCodeCamp", "Programming", "300h", "Beginner", FREE, "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "ES6, regex, OOP, functional programming, DSA."),
+  c("Front End Development Libraries", "freeCodeCamp", "Web Dev", "300h", "Intermediate", FREE, "https://www.freecodecamp.org/learn/front-end-development-libraries/", "React, Redux, Bootstrap, Sass, jQuery — with cert."),
+  c("Back End Development and APIs", "freeCodeCamp", "Web Dev", "300h", "Intermediate", FREE, "https://www.freecodecamp.org/learn/back-end-development-and-apis/", "Node, Express, MongoDB — build real APIs."),
+  c("Data Analysis with Python", "freeCodeCamp", "Data", "300h", "Intermediate", FREE, "https://www.freecodecamp.org/learn/data-analysis-with-python/", "NumPy, Pandas, Matplotlib, Seaborn with 5 projects."),
+  c("Machine Learning with Python", "freeCodeCamp", "AI", "300h", "Intermediate", FREE, "https://www.freecodecamp.org/learn/machine-learning-with-python/", "TensorFlow, neural networks, NLP — free cert."),
+  c("Scientific Computing with Python", "freeCodeCamp", "Programming", "300h", "Beginner", FREE, "https://www.freecodecamp.org/learn/scientific-computing-with-python/", "Python fundamentals through 5 required projects."),
+  c("Information Security", "freeCodeCamp", "Cybersecurity", "300h", "Intermediate", FREE, "https://www.freecodecamp.org/learn/information-security/", "HelmetJS, penetration testing, secure Node apps."),
+  c("Relational Database", "freeCodeCamp", "Data", "300h", "Beginner", FREE, "https://www.freecodecamp.org/learn/relational-database/", "PostgreSQL, Bash, Git via CodeRoad in the terminal."),
+  c("Foundational C# with Microsoft", "freeCodeCamp", "Programming", "35h", "Beginner", FREE, "https://www.freecodecamp.org/learn/foundational-c-sharp-with-microsoft/", "Joint fCC + Microsoft cert in C# fundamentals."),
+  c("College Algebra with Python", "freeCodeCamp", "Math", "300h", "Beginner", FREE, "https://www.freecodecamp.org/learn/college-algebra-with-python/", "University-level algebra taught with Python."),
+  c("A2 English for Developers", "freeCodeCamp", "Language", "300h", "Beginner", FREE, "https://www.freecodecamp.org/learn/a2-english-for-developers/", "English tailored for software developers."),
+
+  // ===== KAGGLE =====
+  c("Intro to Programming", "Kaggle Learn", "Programming", "5h", "Beginner", FREE, "https://www.kaggle.com/learn/intro-to-programming", "Python basics with an official Kaggle badge."),
+  c("Python", "Kaggle Learn", "Programming", "7h", "Beginner", FREE, "https://www.kaggle.com/learn/python", "The most popular Kaggle micro-course."),
+  c("Intro to Machine Learning", "Kaggle Learn", "AI", "3h", "Beginner", FREE, "https://www.kaggle.com/learn/intro-to-machine-learning", "Your first ML model in a weekend."),
+  c("Intermediate Machine Learning", "Kaggle Learn", "AI", "4h", "Intermediate", FREE, "https://www.kaggle.com/learn/intermediate-machine-learning", "Missing values, XGBoost, pipelines, leakage."),
+  c("Pandas", "Kaggle Learn", "Data", "4h", "Beginner", FREE, "https://www.kaggle.com/learn/pandas", "The dataframe library every analyst uses daily."),
+  c("Data Visualization", "Kaggle Learn", "Data", "4h", "Beginner", FREE, "https://www.kaggle.com/learn/data-visualization", "Seaborn from zero to shareable charts."),
+  c("Feature Engineering", "Kaggle Learn", "AI", "5h", "Intermediate", FREE, "https://www.kaggle.com/learn/feature-engineering", "The skill that wins Kaggle competitions."),
+  c("Deep Learning", "Kaggle Learn", "AI", "4h", "Intermediate", FREE, "https://www.kaggle.com/learn/intro-to-deep-learning", "Keras, TensorFlow — build your first neural net."),
+  c("Computer Vision", "Kaggle Learn", "AI", "4h", "Intermediate", FREE, "https://www.kaggle.com/learn/computer-vision", "CNNs and transfer learning with hands-on labs."),
+  c("Intro to SQL", "Kaggle Learn", "Data", "3h", "Beginner", FREE, "https://www.kaggle.com/learn/intro-to-sql", "BigQuery-flavored SQL fundamentals."),
+  c("Advanced SQL", "Kaggle Learn", "Data", "4h", "Intermediate", FREE, "https://www.kaggle.com/learn/advanced-sql", "JOINs, analytic functions, nested data."),
+  c("Intro to AI Ethics", "Kaggle Learn", "AI", "4h", "Beginner", FREE, "https://www.kaggle.com/learn/intro-to-ai-ethics", "Bias, fairness and model cards for practitioners."),
+  c("Time Series", "Kaggle Learn", "Data", "5h", "Intermediate", FREE, "https://www.kaggle.com/learn/time-series", "Forecasting with trend, seasonality and hybrids."),
+  c("Geospatial Analysis", "Kaggle Learn", "Data", "4h", "Intermediate", FREE, "https://www.kaggle.com/learn/geospatial-analysis", "GeoPandas, folium and interactive maps."),
+
+  // ===== HARVARD / MIT (edX / OCW) =====
+  c("CS50's Introduction to Computer Science", "Harvard University", "Programming", "100h", "Beginner", AID, "https://cs50.harvard.edu/x/", "The legendary CS50 — free cert with verified track."),
+  c("CS50's Introduction to Programming with Python", "Harvard University", "Programming", "40h", "Beginner", AID, "https://cs50.harvard.edu/python/", "Malan's Python course — beginner-friendly rigor."),
+  c("CS50's Web Programming with Python and JavaScript", "Harvard University", "Web Dev", "60h", "Intermediate", AID, "https://cs50.harvard.edu/web/", "Django, React, Flask — build real web apps."),
+  c("CS50's Introduction to AI with Python", "Harvard University", "AI", "50h", "Intermediate", AID, "https://cs50.harvard.edu/ai/", "Search, ML, neural nets — Harvard-grade course."),
+  c("CS50's Introduction to Cybersecurity", "Harvard University", "Cybersecurity", "20h", "Beginner", AID, "https://cs50.harvard.edu/cybersecurity/", "Threats, encryption, safe computing for everyone."),
+  c("Justice", "Harvard University", "Philosophy", "40h", "Beginner", AID, "https://www.edx.org/learn/justice/harvard-university-justice", "Michael Sandel's iconic moral reasoning course."),
+  c("Introduction to Computer Science and Programming Using Python", "MIT", "Programming", "45h", "Beginner", AID, "https://www.edx.org/learn/computer-science/massachusetts-institute-of-technology-introduction-to-computer-science-and-programming-using-python", "MIT 6.00.1x — a rigorous CS intro."),
+  c("The Analytics Edge", "MIT", "Data", "60h", "Intermediate", AID, "https://www.edx.org/learn/data-analysis/massachusetts-institute-of-technology-the-analytics-edge", "Real-world analytics with R and case studies."),
+
+  // ===== STANFORD ONLINE =====
+  c("Machine Learning Specialization", "Stanford / DeepLearning.AI", "AI", "60h", "Beginner", AID, "https://www.coursera.org/specializations/machine-learning-introduction", "Andrew Ng's flagship ML course, refreshed for 2024+."),
+  c("Deep Learning Specialization", "DeepLearning.AI", "AI", "120h", "Intermediate", AID, "https://www.coursera.org/specializations/deep-learning", "CNNs, RNNs, transformers — audit free, cert with aid."),
+  c("Generative AI for Everyone", "DeepLearning.AI", "AI", "6h", "Beginner", AID, "https://www.coursera.org/learn/generative-ai-for-everyone", "Andrew Ng's non-technical intro to GenAI at work."),
+  c("Prompt Engineering for Developers", "DeepLearning.AI", "AI", "2h", "Intermediate", FREE, "https://learn.deeplearning.ai/chatgpt-prompt-eng", "Free short course by Isa Fulford and Andrew Ng."),
+  c("LangChain for LLM Application Development", "DeepLearning.AI", "AI", "2h", "Intermediate", FREE, "https://learn.deeplearning.ai/langchain", "Build LLM apps with chains, agents and memory."),
+
+  // ===== YALE / COURSERA CLASSICS =====
+  c("The Science of Well-Being", "Yale University", "Psychology", "20h", "Beginner", AID, "https://www.coursera.org/learn/the-science-of-well-being", "Yale's most popular course — audit free."),
+  c("Financial Markets", "Yale University", "Finance", "33h", "Beginner", AID, "https://www.coursera.org/learn/financial-markets-global", "Nobel laureate Robert Shiller's markets course."),
+  c("Learning How to Learn", "McMaster / UC San Diego", "Learning", "15h", "Beginner", AID, "https://www.coursera.org/learn/learning-how-to-learn", "The most enrolled course in Coursera history."),
+  c("Successful Negotiation", "University of Michigan", "Business", "17h", "Beginner", AID, "https://www.coursera.org/learn/negotiation-skills", "A practical negotiation framework used worldwide."),
+
+  // ===== OPENCLASSROOMS / OTHERS =====
+  c("Web Accessibility by Google", "Google / Udacity", "Web Dev", "2wk", "Intermediate", FREE, "https://www.udacity.com/course/web-accessibility--ud891", "Ship WCAG-compliant, screen-reader-friendly UIs."),
+  c("Frontend Developer Path", "The Odin Project", "Web Dev", "150h", "Beginner", FREE, "https://www.theodinproject.com/paths/foundations/courses/foundations", "Open-source full-stack curriculum, self-paced."),
+  c("Full Stack Open", "University of Helsinki", "Web Dev", "150h", "Intermediate", FREE, "https://fullstackopen.com/en/", "React, Node, GraphQL, TypeScript — with ECTS cert."),
+  c("MOOC.fi Java Programming I", "University of Helsinki", "Programming", "80h", "Beginner", FREE, "https://java-programming.mooc.fi/", "The world-class Helsinki Java MOOC — free cert."),
+  c("MOOC.fi Java Programming II", "University of Helsinki", "Programming", "80h", "Intermediate", FREE, "https://java-programming.mooc.fi/part-8", "Continuation of Helsinki's Java series."),
+  c("Elements of AI", "University of Helsinki / MinnaLearn", "AI", "30h", "Beginner", FREE, "https://www.elementsofai.com/", "Non-technical AI course used across the EU."),
+  c("Building AI", "University of Helsinki / MinnaLearn", "AI", "50h", "Intermediate", FREE, "https://buildingai.elementsofai.com/", "Follow-up to Elements of AI — free ECTS-graded cert."),
+
+  // ===== ATLASSIAN / GITLAB / DATABRICKS =====
+  c("Agile with Atlassian Jira", "Atlassian", "Project Mgmt", "10h", "Beginner", AID, "https://www.coursera.org/learn/agile-atlassian-jira", "Learn Scrum and Kanban inside Jira — audit free."),
+  c("GitLab Certified Associate", "GitLab", "DevOps", "6h", "Beginner", FREE, "https://about.gitlab.com/learn/certifications/gitlab-certified-associate/", "Official GitLab associate cert — free path."),
+  c("Databricks Lakehouse Fundamentals", "Databricks", "Data", "3h", "Beginner", FREE, "https://www.databricks.com/learn/training/lakehouse-fundamentals", "Free official accreditation from Databricks."),
+  c("MongoDB University: M001 Basics", "MongoDB University", "Data", "10h", "Beginner", FREE, "https://learn.mongodb.com/learn/course/m001-mongodb-basics/lesson-1-introduction/learn", "MongoDB's flagship intro with a free badge."),
+  c("Oracle Cloud Infrastructure Foundations", "Oracle University", "Cloud", "8h", "Beginner", FREE, "https://mylearn.oracle.com/ou/learning-path/become-an-oci-foundations-associate-2024/136322", "Free OCI Foundations Associate cert path."),
+
+  // ===== SALESFORCE TRAILHEAD =====
+  c("Salesforce Admin Beginner Trail", "Salesforce Trailhead", "CRM", "20h", "Beginner", FREE, "https://trailhead.salesforce.com/users/strailhead/trailmixes/getting-started-as-a-salesforce-admin", "Free trail with Trailhead badges and super-badges."),
+  c("Salesforce Developer Beginner", "Salesforce Trailhead", "Programming", "25h", "Beginner", FREE, "https://trailhead.salesforce.com/content/learn/trails/force_com_dev_beginner", "Apex, Lightning, and platform basics."),
+  c("Salesforce AI Associate (prep)", "Salesforce Trailhead", "AI", "10h", "Beginner", PAID_CERT, "https://trailhead.salesforce.com/content/learn/trails/prepare-for-the-salesforce-ai-associate-credential", "Free study path — exam paid."),
 ];
 
 export const CATEGORIES = ["All", ...Array.from(new Set(COURSES.map((x) => x.category))).sort()];
