@@ -19,10 +19,10 @@ export default function App() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return COURSES.filter((c) => {
-      if (category !== "All" && c.category !== category) return false;
+      if (category !== "All" && categoryOf(c) !== category) return false;
       if (level !== "All" && c.level !== level) return false;
       if (cost !== "All" && c.cost !== cost) return false;
-      if (provider !== "All" && c.provider !== provider) return false;
+      if (provider !== "All" && providerOf(c) !== provider) return false;
       if (!q) return true;
       return (
         c.title.toLowerCase().includes(q) ||
