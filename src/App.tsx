@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS } from "@/data/courses";
+import { COURSES, CATEGORIES, LEVELS, COSTS, PROVIDERS, categoryOf, providerOf } from "@/data/courses";
 import { ChatAssistant } from "@/components/ChatAssistant";
 
 const COMPANY_LOGOS = [
