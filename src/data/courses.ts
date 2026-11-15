@@ -450,6 +450,8 @@ const CATEGORY_MAP: Record<string, string> = {
 
 const PROVIDER_MAP: Array<[RegExp, string]> = [
   [/^HubSpot/i, "HubSpot Academy"],
+  [/HP LIFE/i, "HP LIFE"],
+  [/Open University/i, "The Open University"],
   [/Google/i, "Google"],
   [/^IBM/i, "IBM"],
   [/^Microsoft/i, "Microsoft"],
