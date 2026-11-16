@@ -1,4 +1,5 @@
 import { createLovableAiGatewayProvider } from "../src/lib/ai-gateway.server";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { COURSES } from "../src/data/courses";
 
@@ -35,12 +36,24 @@ export default async function handler(req: Request) {
     return new Response("Messages are required", { status: 400 });
   }
 
-  const key = process.env.LOVABLE_API_KEY;
-  if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+  const geminiApiKey = process.env.GEMINI_API_KEY;
+  const lovableApiKey = process.env.LOVABLE_API_KEY;
 
-  const gateway = createLovableAiGatewayProvider(key);
+  const model = geminiApiKey
+    ? createGoogleGenerativeAI({ apiKey: geminiApiKey })("gemini-3.5-flash")
+    : lovableApiKey
+      ? createLovableAiGatewayProvider(lovableApiKey)("google/gemini-3-flash-preview")
+      : undefined;
+
+  if (!model) {
+    return Response.json(
+      { error: "Add GEMINI_API_KEY to your Vercel project environment variables to enable chat." },
+      { status: 503 },
+    );
+  }
+
   const result = streamText({
-    model: gateway("google/gemini-3-flash-preview"),
+    model,
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages as UIMessage[]),
   });

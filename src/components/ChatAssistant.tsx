@@ -21,7 +21,7 @@ export function ChatAssistant() {
     },
   ];
 
-  const { messages, sendMessage, status } = useChat({
+  const { messages, sendMessage, status, error, clearError } = useChat({
     transport: new DefaultChatTransport({ api: "/api/chat" }),
     messages: initialMessages,
   });
@@ -37,6 +37,7 @@ export function ChatAssistant() {
     e.preventDefault();
     const text = input.trim();
     if (!text || busy) return;
+    clearError();
     void sendMessage({ text });
     setInput("");
   };
@@ -126,12 +127,24 @@ export function ChatAssistant() {
               {suggestions.map((s) => (
                 <button
                   key={s}
-                  onClick={() => void sendMessage({ text: s })}
+                  onClick={() => {
+                    clearError();
+                    void sendMessage({ text: s });
+                  }}
                   className="rounded-full border border-ink/20 bg-white px-3 py-1 text-xs text-ink/80 transition hover:border-ink hover:bg-ink hover:text-cream"
                 >
                   {s}
                 </button>
               ))}
+            </div>
+          )}
+
+          {error && (
+            <div role="alert" className="mx-4 mb-3 rounded-lg border border-flame/30 bg-flame/10 px-3 py-2 text-sm text-ink">
+              <p className="font-semibold">The assistant couldn’t connect.</p>
+              <p className="mt-1 text-xs text-ink/70">
+                Check that your Gemini API key is added in Vercel, then send your question again.
+              </p>
             </div>
           )}
 

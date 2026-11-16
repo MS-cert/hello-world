@@ -1,0 +1,2 @@
+- [x] Match the site favicon to the FreeCertHub mark.
+- [x] Fix chat setup for a Gemini key and verify the preview assistant.
